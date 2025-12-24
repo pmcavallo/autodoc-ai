@@ -1,0 +1,13 @@
+{
+  "evaluation_date": "2025-11-28T08:17:22.796681",
+  "overall_score": 0.7933333333333334,
+  "evaluation_method": "custom_claude_based",
+  "metrics": {
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.6166666666666667,
+    "context_precision": 0.8000000000000002,
+    "context_recall": 0.7566666666666667
+  },
+  "test_cases": 3,
+  "system": "AutoDoc AI Multi-Agent RAG"
+}

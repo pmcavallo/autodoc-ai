@@ -1,0 +1,36 @@
+# AutoDoc AI - Python Dependencies
+
+# Core Framework
+streamlit>=1.28.0
+python-dotenv>=1.0.0
+
+# LLM and AI
+anthropic>=0.7.0
+
+# RAG and Vector Store
+chromadb>=0.4.15
+sentence-transformers>=2.2.2
+
+# Document Processing
+python-pptx>=0.6.21
+markdown>=3.5.0
+pyyaml>=6.0.1
+
+# PDF Generation
+weasyprint>=60.0
+pypandoc>=1.12  # Optional: for Pandoc backend
+
+# Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Utilities
+tqdm>=4.66.0
+requests>=2.31.0
+
+# Testing (optional for development)
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Type Hints
+typing-extensions>=4.8.0
