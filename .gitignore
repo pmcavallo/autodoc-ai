@@ -12,7 +12,6 @@ ENV/
 
 # Environment
 .env
-*.env
 
 # IDE
 .vscode/
@@ -21,118 +20,12 @@ ENV/
 # Streamlit
 .streamlit/
 
-# Generated databases
+# Generated databases and outputs
 chroma_db/
-
-# Runtime data
-sessions/
 outputs/
+sessions/
 memory/
-data/memory/
-data/daily_count.txt
-data/daily_reset.txt
-data/rate_limit_usage.json
-
-# Windows artifacts
-nul
 
 # OS
 .DS_Store
 Thumbs.db
-
-# Presentations (internal)
-autodoc_ai*.pptx
-autodoc_ai.pdf
-
-# Internal development notes and status files
-2025-*.md
-ALL_BUGS_FIXED_SUMMARY.md
-AUTODOC_AI_GETTING_STARTED_GUIDE.md
-AUTODOC_AI_HANDOFF.txt
-AUTODOC_AI_LEARNING_ROADMAP.md
-AUTODOC_AI_PRESENTATION_SCRIPT_COMPLETE.md
-AutoDoc_AI_Presentation_Script_FINAL.md
-autodoc_ai_project_spec.md
-AUTODOC_AI_QA_GUIDE_COMPREHENSIVE.md
-AUTODOC_AI_RED_TEAM_ANALYSIS.md
-AUTODOC_AI_STATUS_AND_NEXT_PHASES.txt
-AUTODOC_AI_STATUS_AND_NEXT_PHASES_COMPLETE.txt
-AutoDoc_AI_Talking_Points_Slides_15-26.md
-AutoDoc_AI_2_Plan.txt
-BEFORE_AFTER_COMPARISON.md
-BOTH_FIXES_SUMMARY.md
-BUGFIX_AGENT_DASHBOARD.md
-BUGS_FIXED_SUMMARY.md
-CLAUDE_CODE_BRIEF.md
-CLAUDE_CODE_FOCUSED_PROMPT.md
-COMPLETE_FIX_INSTRUCTIONS.md
-CRITICAL_FIXES_SUMMARY.md
-day3_summary.txt
-days1_2.txt
-DEPLOYMENT.md
-FIDELITY_ASSESSMENT_COMPREHENSIVE.md
-FINAL_BUG_FIX_ROUND3.md
-FINAL_SUMMARY.md
-FIXED_ROUTER_METHOD.py
-FIXES_APPLIED_FINAL.md
-FIX_2_TEST_FILE.md
-generated_complete_document.md
-HANDOFF_TO_FUTURE_CLAUDE.txt
-HANDOFF_TO_MONDAY_CLAUDE.md
-HF_README.md
-IMPLEMENTATION_ROADMAP.txt
-INTEGRATION_FIXES_SUMMARY.md
-LANGSMITH_OBSERVABILITY_ANALYSIS.md
-linkedin post memory.txt
-LOCAL_TESTING_CHECKLIST.md
-MODEL_CHANGES_SUMMARY.txt
-model_documentation*.md
-MONDAY_DEPLOYMENT_GUIDE.md
-MONDAY_QUICK_REFERENCE.md
-ORCHESTRATOR_PLAYBOOK.md
-packages.txt
-PHASE2_COMPLETION_REPORT.md
-PHASE2_SUMMARY.md
-PHASE3_SUMMARY.md
-PRESENTATION_QA_GUIDE.md
-PROJECT_COMPLETE.md
-QUALITY_EVALUATION_REPORT.md
-QUICKSTART_STREAMLIT.md
-QUICK_START.md
-STREAMLIT_ALL_FIXES.md
-STREAMLIT_APP_STATUS.md
-STREAMLIT_TEST_REPORT.md
-SWITCH_TO_HAIKU_GUIDE.md
-SYSTEM_STATUS_REPORT.md
-TESTING.md
-TESTING_DISCIPLINE_SUMMARY.md
-TEST_RESULTS.md
-VERIFY_FIXES.md
-WRITER_AGENT_UPDATE_NOTES.md
-
-# Root-level test files (tests are in tests/ folder)
-test_*.py
-
-# Root-level utility scripts
-add_existing_regulations.py
-check_cost_tracker.py
-orchestrator.py
-ragas_evaluator.py
-rate_limiter.py
-setup_project.py
-writer_agent.py
-
-# Backup/duplicate files
-*_CLEAN.py
-*_READY.py
-
-# Duplicate data directories (typos)
-dataanchor_document/
-dataaudit_findings/
-dataregulations/
-datasynthetic_docs/
-
-# Miscellaneous
-gitignore
-langgraph.png
-v1VSv2.png
