@@ -1,5 +1,7 @@
 # AutoDoc AI - Automated Model Documentation Generator
 
+![The agent dashboard, showing each agent's role and a live cost tracker](docs/images/agent-dashboard.png)
+
 ⚠️ **SYNTHETIC DATA - FOR DEMONSTRATION ONLY**
 
 This project contains entirely synthetic data created for portfolio demonstration purposes. No real insurance data, customer information, proprietary methodologies, or confidential information from any insurance company or financial institution is used or simulated.
@@ -9,6 +11,14 @@ This project contains entirely synthetic data created for portfolio demonstratio
 ## 🎯 Project Overview
 
 **AutoDoc AI** is a multi-agent RAG system that automates the generation of comprehensive, audit-ready model documentation for auto insurance pricing models. The system transforms analyst PowerPoint presentations into 30-50 page White Papers that meet regulatory requirements (NAIC, ASOPs) and audit standards.
+
+## Status
+
+**Complete and evaluated.** Both orchestrators run end to end. The evaluation suite runs and its
+results are in this repository, including the metrics that fell short of target.
+
+The hosted demo is currently switched off because it runs on a personal API key. Everything runs
+locally with your own key; see Getting Started.
 
 ### The Problem
 
@@ -55,6 +65,45 @@ Input: PowerPoint Presentation (15-20 slides)
     ↓
 Output: Comprehensive White Paper (30-50 pages, PDF)
 ```
+### Retrieval quality: 79.3%, two metrics below target
+
+The same system, evaluated as a RAG pipeline rather than for factual accuracy.
+
+| Metric | Score | Target | |
+|---|---|---|---|
+| Faithfulness | 100% | 85% | pass |
+| Context precision | 80% | 75% | pass |
+| Answer relevancy | 62% | 80% | **below target** |
+| Context recall | 76% | 80% | **below target** |
+| **Overall** | **79.3%** | | |
+
+**Both numbers are correct and they measure different things.** Faithfulness asks whether the
+output stuck to the context it was given. Recall asks whether that context was any good in the
+first place. A system can be perfectly faithful to badly retrieved material.
+
+The two failing metrics point at retrieval, not generation. Chunking strategy and retrieval depth
+are the first things to change. That work is not done.
+
+Evaluation used Haiku as the judge rather than Sonnet, which cut evaluation cost by roughly 90%.
+Structured scoring does not need the expensive model.
+
+**Two orchestrators, same four agents.** `agents/orchestrator.py` is hand-rolled Python: a method
+per phase, state passed explicitly, the loop is a `for` and an `if`. `agents/langgraph_orchestrator.py`
+is the same pipeline as a LangGraph state graph, with conditional routing and memory.
+
+They are both here on purpose. Read them side by side.
+
+### Keeping facts and style apart
+
+The writer agent receives two inputs and they have different jobs:
+
+- **Source content** is the presentation. It is the only permitted source of facts and numbers.
+- **Retrieved context** is past documentation. It is used for structure and phrasing only.
+
+The prompt states this explicitly, including instructions not to invent or estimate quantitative
+data and to preserve exact statistical measures. Before that separation was explicit, the system
+would occasionally borrow a number from a retrieved example, from a different model entirely.
+That is where the 47 of 47 comes from.
 
 **RAG Knowledge Base:**
 - 5-7 past model documentations (auto insurance)
@@ -149,27 +198,38 @@ pytest tests/test_rag.py
 3. **Review Output:** Preview the generated White Paper in Markdown
 4. **Download:** Download the final PDF for audit submission
 
+Upload a presentation from `data/examples/`, watch the agents in the dashboard tab, and download
+the result.
+
+### The three tabs
+
+**Upload.** Drop a presentation in and it reports what it found before anything runs.
+
+![The upload tab, showing a presentation preview with slide, text block and table counts](docs/images/upload-tab.png)
+
+**Agent dashboard.** Each agent's role and capabilities, a live workflow log, and cost tracking
+that updates while the run is in progress. The cost panel exists because a run makes about 11 API
+calls and you want to see the number moving rather than discover it at the end of the month.
+
+**Results.** Key findings, quality metrics, a document preview, and Markdown or PDF download.
+
+![The results tab, showing key findings, recommendations and a Markdown download panel](docs/images/results-tab.png)
+
+**Run the evaluation:**
+
+```bash
+py -3 evaluation/custom_rag_eval.py
+```
+
+**Cost.** About 25 cents per document on Sonnet, about 2 cents on Haiku. A full run is roughly 11
+API calls, or 27 if the compliance loop runs its three iterations.
+
 ### Example Presentations
 
 Three pre-built examples are included in `data/examples/`:
 1. Bodily Injury Frequency Model (GLM)
 2. Collision Severity Model Enhancement (GLM with telematics)
 3. Territory Re-rating Project (clustering + GLM)
-
----
-
-## 🧪 Project Status
-
-**Current Phase:** Phase 1 - Foundation
-- [ ] Synthetic document library created
-- [ ] RAG pipeline implemented
-- [ ] PowerPoint parser built
-- [ ] ChromaDB set up
-
-**Next Phase:** Phase 2 - Agents (Days 4-7)
-- [ ] LangGraph orchestration
-- [ ] 4 specialized agents with tools
-- [ ] Feedback loop implementation
 
 ---
 
